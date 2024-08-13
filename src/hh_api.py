@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 import requests
 
 class AbstractAPI(ABC):
+    """Абстрактный класс от ABC"""
     @abstractmethod
     def get_response(self, text, per_page):
         pass
@@ -19,18 +20,18 @@ class Headhunter(AbstractAPI):
         self.__url = "https://api.hh.ru/vacancies"
 
     def get_response(self, text: str, per_page: int):
-        """Запрос на HH API"""
+        """ Метод выполняет запрос на API сайта hh.ru"""
         params = {"text": text, "per_page": per_page}
         response = requests.get(self.__url, params=params)
         return response
 
     def get_vacancies(self, text: str, per_page: int=20) -> list:
-        """Получение вакансий"""
+        """Метод возвращает запрошенную вакансию, к примеру python"""
         vacancies = self.get_response(text, per_page).json()["items"]
         return vacancies
 
     def get_filter_vacancies(self, text: str, per_page: int) -> list:
-        """"Фильтрация ключей для всех вакансий"""
+        """"Метод поиска с ключевым словом в описании для всех вакансий"""
         filter_vacancies = []
         vacancies = self.get_vacancies(text, per_page)
         for vacancy in vacancies:
@@ -42,7 +43,7 @@ class Headhunter(AbstractAPI):
             })
         return filter_vacancies
 
-hh = Headhunter()
-data = hh.get_filter_vacancies("python", 100)
-for elem in data:
-    print(elem["salary"])
+# hh = Headhunter()
+# data = hh.get_filter_vacancies("python", 100)
+# for elem in data:
+#     print(elem["salary"])

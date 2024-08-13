@@ -8,6 +8,7 @@ class Vacancy:
         self.__validate_salary(salary)
 
     def __validate_salary(self, salary):
+        """Метод проверяет зарплату от и до"""
         if salary is None:
             self.salary_from = 0
             self.salary_to = 0
@@ -16,12 +17,14 @@ class Vacancy:
             self.salary_to = salary["to"] if salary["to"] else 0
 
     def __str__(self):
+        """Метод возвращает строковое выражение"""
         return f"""Имя: {self.name}
 Зарплата: от {self.salary_from} до {self.salary_to}
 url: {self.url}
 Название компании: {self.employer}"""
 
     def __lt__(self, other):
+        """Метод сравнения, возвращает"""
         """<"""
         return (self.salary_from, self.salary_to) < (other.salary_from, other.salary_to)
 

@@ -43,7 +43,4 @@ class Headhunter(AbstractAPI):
             })
         return filter_vacancies
 
-# hh = Headhunter()
-# data = hh.get_filter_vacancies("python", 100)
-# for elem in data:
-#     print(elem["salary"])
+
